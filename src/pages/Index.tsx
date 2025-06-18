@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Star, Users, Zap, TrendingUp } from "lucide-react";
+import BannerAd from "../components/ads/BannerAd";
+import PopupAd from "../components/ads/PopupAd";
+import InlineAd from "../components/ads/InlineAd";
 
 const Index = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -36,8 +39,14 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+      {/* Popup Ad */}
+      <PopupAd delay={10} showOnce={true} />
+
+      {/* Top Banner Ad */}
+      <BannerAd position="top" size="small" />
+
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-black/20 backdrop-blur-md border-b border-white/10">
+      <nav className="sticky top-0 w-full z-40 bg-black/20 backdrop-blur-md border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
@@ -78,7 +87,7 @@ const Index = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/store">
-                <Button size="lg" className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-8 py-4 text-lg">
+                <Button size="lg" className="px-8 py-4 text-lg">
                   Browse Templates
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
@@ -86,7 +95,7 @@ const Index = () => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-white/20 text-white hover:bg-gradient-to-r hover:from-purple-500 hover:to-pink-500 hover:border-transparent hover:text-white transition-all duration-300 px-8 py-4 text-lg"
+                className="px-8 py-4 text-lg"
               >
                 Learn More
               </Button>
@@ -94,6 +103,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Inline Ad */}
+      <InlineAd size="medium" />
 
       {/* Features Section */}
       <section className="py-20 px-4">
@@ -116,6 +128,9 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Inline Ad */}
+      <InlineAd size="large" />
+
       {/* CTA Section */}
       <section className="py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
@@ -125,7 +140,7 @@ const Index = () => {
               Join thousands of developers who trust TempHub for their template needs.
             </p>
             <Link to="/store">
-              <Button size="lg" className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-8 py-4 text-lg">
+              <Button size="lg" className="px-8 py-4 text-lg">
                 Explore Templates
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
@@ -133,6 +148,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Bottom Banner Ad */}
+      <BannerAd position="bottom" size="medium" />
 
       {/* Footer */}
       <footer className="border-t border-white/10 py-12 px-4">

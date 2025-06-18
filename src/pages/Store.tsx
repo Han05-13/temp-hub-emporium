@@ -1,10 +1,12 @@
-
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, Filter, ExternalLink, Star } from "lucide-react";
 import TemplateCard from "../components/TemplateCard";
+import BannerAd from "../components/ads/BannerAd";
+import SidebarAd from "../components/ads/SidebarAd";
+import InlineAd from "../components/ads/InlineAd";
 
 interface Template {
   id: string;
@@ -40,8 +42,15 @@ const Store = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+      {/* Sidebar Ads */}
+      <SidebarAd side="left" />
+      <SidebarAd side="right" />
+
+      {/* Top Banner Ad */}
+      <BannerAd position="top" size="small" />
+
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-black/20 backdrop-blur-md border-b border-white/10">
+      <nav className="sticky top-0 w-full z-40 bg-black/20 backdrop-blur-md border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link to="/" className="flex items-center">
@@ -94,11 +103,6 @@ const Store = () => {
                   key={category}
                   variant={selectedCategory === category ? "default" : "outline"}
                   onClick={() => setSelectedCategory(category)}
-                  className={
-                    selectedCategory === category
-                      ? "bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white"
-                      : "border-white/20 text-white hover:bg-gradient-to-r hover:from-purple-500 hover:to-pink-500 hover:border-transparent transition-all duration-300"
-                  }
                 >
                   {category}
                 </Button>
@@ -108,6 +112,9 @@ const Store = () => {
         </div>
       </section>
 
+      {/* Inline Ad */}
+      <InlineAd size="medium" />
+
       {/* Templates Grid */}
       <section className="pb-20 px-4">
         <div className="max-w-7xl mx-auto">
@@ -116,6 +123,9 @@ const Store = () => {
           </div>
         </div>
       </section>
+
+      {/* Bottom Banner Ad */}
+      <BannerAd position="bottom" size="medium" />
     </div>
   );
 };
