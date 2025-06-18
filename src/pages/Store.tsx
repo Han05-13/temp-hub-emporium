@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -23,15 +24,9 @@ const Store = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   useEffect(() => {
-    // Load templates from localStorage
-    const savedTemplates = localStorage.getItem("tempHubTemplates");
-    if (savedTemplates) {
-      setTemplates(JSON.parse(savedTemplates));
-    } else {
-      // Remove sample templates - user will upload their own
-      setTemplates([]);
-      localStorage.setItem("tempHubTemplates", JSON.stringify([]));
-    }
+    // Clear all templates - user will upload their own
+    setTemplates([]);
+    localStorage.setItem("tempHubTemplates", JSON.stringify([]));
   }, []);
 
   const categories = ["All", "Dashboard", "Landing Page", "Portfolio", "E-commerce", "Blog"];
@@ -99,11 +94,11 @@ const Store = () => {
                   key={category}
                   variant={selectedCategory === category ? "default" : "outline"}
                   onClick={() => setSelectedCategory(category)}
-                  className={`${
+                  className={
                     selectedCategory === category
-                      ? "bg-gradient-to-r from-purple-500 to-pink-500"
-                      : "border-white/20 text-white hover:bg-white/10"
-                  }`}
+                      ? "bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white"
+                      : "border-white/20 text-white hover:bg-gradient-to-r hover:from-purple-500 hover:to-pink-500 hover:border-transparent transition-all duration-300"
+                  }
                 >
                   {category}
                 </Button>
@@ -116,17 +111,9 @@ const Store = () => {
       {/* Templates Grid */}
       <section className="pb-20 px-4">
         <div className="max-w-7xl mx-auto">
-          {filteredTemplates.length === 0 ? (
-            <div className="text-center py-20">
-              <p className="text-gray-400 text-lg">No templates available yet. Upload your first template to get started!</p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredTemplates.map((template) => (
-                <TemplateCard key={template.id} template={template} />
-              ))}
-            </div>
-          )}
+          <div className="text-center py-20">
+            <p className="text-gray-400 text-lg">No templates available yet. Upload your first template to get started!</p>
+          </div>
         </div>
       </section>
     </div>
