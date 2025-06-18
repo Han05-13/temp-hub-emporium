@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -49,10 +48,13 @@ const Index = () => {
               <Link to="/store" className="text-white hover:text-purple-300 transition-colors">
                 Store
               </Link>
+              <Link to="/about" className="text-white hover:text-purple-300 transition-colors">
+                About
+              </Link>
               <Link to="/upload" className="text-white hover:text-purple-300 transition-colors">
                 Upload
               </Link>
-              <Button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600">
+              <Button>
                 Get Started
               </Button>
             </div>

@@ -113,6 +113,9 @@ const Upload = () => {
               <Link to="/store" className="text-white hover:text-purple-300 transition-colors">
                 Store
               </Link>
+              <Link to="/about" className="text-white hover:text-purple-300 transition-colors">
+                About
+              </Link>
               <Link to="/upload" className="text-purple-300 font-medium">
                 Upload
               </Link>

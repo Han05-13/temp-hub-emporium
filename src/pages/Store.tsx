@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -29,44 +28,9 @@ const Store = () => {
     if (savedTemplates) {
       setTemplates(JSON.parse(savedTemplates));
     } else {
-      // Initialize with some sample templates
-      const sampleTemplates: Template[] = [
-        {
-          id: "1",
-          title: "Modern Dashboard",
-          description: "Clean and responsive admin dashboard template with dark mode support",
-          price: "$29",
-          image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
-          gumroadLink: "https://gumroad.com",
-          category: "Dashboard",
-          rating: 4.8,
-          downloads: 1250
-        },
-        {
-          id: "2", 
-          title: "E-commerce Landing",
-          description: "High-converting landing page template for online stores",
-          price: "$39",
-          image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop",
-          gumroadLink: "https://gumroad.com",
-          category: "Landing Page",
-          rating: 4.9,
-          downloads: 890
-        },
-        {
-          id: "3",
-          title: "Portfolio Website",
-          description: "Stunning portfolio template for creatives and developers",
-          price: "$25",
-          image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=400&h=300&fit=crop",
-          gumroadLink: "https://gumroad.com",
-          category: "Portfolio",
-          rating: 4.7,
-          downloads: 2100
-        }
-      ];
-      setTemplates(sampleTemplates);
-      localStorage.setItem("tempHubTemplates", JSON.stringify(sampleTemplates));
+      // Remove sample templates - user will upload their own
+      setTemplates([]);
+      localStorage.setItem("tempHubTemplates", JSON.stringify([]));
     }
   }, []);
 
@@ -96,6 +60,9 @@ const Store = () => {
               </Link>
               <Link to="/store" className="text-purple-300 font-medium">
                 Store
+              </Link>
+              <Link to="/about" className="text-white hover:text-purple-300 transition-colors">
+                About
               </Link>
               <Link to="/upload" className="text-white hover:text-purple-300 transition-colors">
                 Upload
@@ -151,7 +118,7 @@ const Store = () => {
         <div className="max-w-7xl mx-auto">
           {filteredTemplates.length === 0 ? (
             <div className="text-center py-20">
-              <p className="text-gray-400 text-lg">No templates found matching your criteria.</p>
+              <p className="text-gray-400 text-lg">No templates available yet. Upload your first template to get started!</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
