@@ -1,4 +1,5 @@
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Upload as UploadIcon, Image, Link as LinkIcon, FileText, Sparkles, Info } from "lucide-react";
+import { Upload as UploadIcon, Image, Link as LinkIcon, FileText, Sparkles, Info, Lock } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
 interface Prompt {
@@ -25,6 +26,8 @@ interface Prompt {
 
 const Upload = () => {
   const navigate = useNavigate();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [email, setEmail] = useState("");
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -38,8 +41,31 @@ const Upload = () => {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string>("");
 
-  const categories = ["Web Apps", "Landing Pages", "Dashboards", "APIs", "Components", "Full Stack"];
+  const ADMIN_EMAIL = "hariharansuthan05@gmail.com";
+  const categories = ["Web Apps", "Landing Pages", "Dashboards", "SaaS", "UI Templates", "Full Stack"];
   const tools = ["Lovable.dev", "Cursor", "Replit", "GitHub Copilot"];
+
+  // Clear all prompts on component mount (empty the store)
+  useEffect(() => {
+    localStorage.removeItem("oceanPrompts");
+  }, []);
+
+  const handleEmailVerification = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email === ADMIN_EMAIL) {
+      setIsAuthenticated(true);
+      toast({
+        title: "Access Granted",
+        description: "Welcome, admin!"
+      });
+    } else {
+      toast({
+        title: "Access Denied",
+        description: "Only the admin can upload prompts",
+        variant: "destructive"
+      });
+    }
+  };
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({
@@ -124,6 +150,45 @@ const Upload = () => {
     }, 1500);
   };
 
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 flex items-center justify-center px-4">
+        <Card className="w-full max-w-md bg-white/5 backdrop-blur-sm border-white/10">
+          <CardHeader>
+            <CardTitle className="text-white flex items-center gap-2 justify-center">
+              <Lock className="w-6 h-6" />
+              Admin Access Required
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleEmailVerification} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="email" className="text-white">
+                  Email Address
+                </Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="bg-white/10 border-white/20 text-white placeholder-gray-400"
+                  required
+                />
+              </div>
+              <Button
+                type="submit"
+                className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white"
+              >
+                Verify Access
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950">
       {/* Navigation */}
@@ -131,12 +196,12 @@ const Upload = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link to="/" className="flex items-center">
-              <Sparkles className="w-8 h-8 text-cyan-400 mr-2" />
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+              <Sparkles className="w-6 h-6 sm:w-8 sm:h-8 text-cyan-400 mr-2" />
+              <h1 className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
                 Ocean of Prompts
               </h1>
             </Link>
-            <div className="flex items-center space-x-8">
+            <div className="hidden sm:flex items-center space-x-8">
               <Link to="/" className="text-gray-300 hover:text-cyan-400 transition-all duration-300 font-medium">
                 Home
               </Link>
@@ -157,9 +222,9 @@ const Upload = () => {
       {/* Upload Form */}
       <section className="pt-24 pb-20 px-4">
         <div className="max-w-2xl mx-auto">
-          <div className="text-center mb-12">
-            <h1 className="text-5xl font-bold text-white mb-4">Submit Prompt</h1>
-            <p className="text-gray-300 text-lg">
+          <div className="text-center mb-8 sm:mb-12">
+            <h1 className="text-3xl sm:text-5xl font-bold text-white mb-4">Submit Prompt</h1>
+            <p className="text-gray-300 text-base sm:text-lg">
               Add new AI prompts to the Ocean of Prompts collection
             </p>
           </div>
