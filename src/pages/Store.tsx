@@ -26,9 +26,11 @@ const Store = () => {
   const [selectedTool, setSelectedTool] = useState("All");
 
   useEffect(() => {
-    // Initialize with empty prompts - user will upload their own
-    setPrompts([]);
-    localStorage.setItem("oceanPrompts", JSON.stringify([]));
+    // Load prompts from localStorage
+    const storedPrompts = localStorage.getItem("oceanPrompts");
+    if (storedPrompts) {
+      setPrompts(JSON.parse(storedPrompts));
+    }
   }, []);
 
   const categories = ["All", "Web Apps", "Landing Pages", "Dashboards", "APIs", "Components", "Full Stack"];
@@ -149,26 +151,26 @@ const Store = () => {
         </div>
       </section>
 
-      {/* Empty State */}
+      {/* Prompts Grid or Empty State */}
       <section className="pb-20 px-4">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center py-20">
-            <div className="relative mb-8">
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 to-blue-400/20 rounded-full blur-xl"></div>
-              <div className="relative w-24 h-24 mx-auto bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full flex items-center justify-center border border-cyan-400/30">
-                <Code2 className="w-12 h-12 text-cyan-400" />
-              </div>
+          {filteredPrompts.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredPrompts.map((prompt) => (
+                <TemplateCard key={prompt.id} template={prompt} />
+              ))}
             </div>
-            <h3 className="text-2xl font-bold text-white mb-4">No Prompts Available Yet</h3>
-            <p className="text-gray-400 text-lg mb-8 max-w-md mx-auto">
-              Be the first to contribute! Upload your structured AI prompts and help the community build better applications.
-            </p>
-            <Link to="/upload">
-              <Button size="lg" className="px-8 py-3">
-                Submit Your First Prompt
-              </Button>
-            </Link>
-          </div>
+          ) : (
+            <div className="text-center py-20">
+              <div className="relative mb-8">
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 to-blue-400/20 rounded-full blur-xl"></div>
+                <div className="relative w-24 h-24 mx-auto bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full flex items-center justify-center border border-cyan-400/30">
+                  <Code2 className="w-12 h-12 text-cyan-400" />
+                </div>
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-4">No Prompts Available Yet</h3>
+            </div>
+          )}
         </div>
       </section>
     </div>

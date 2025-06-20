@@ -7,10 +7,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Upload as UploadIcon, Image, Link as LinkIcon, FileText } from "lucide-react";
+import { Upload as UploadIcon, Image, Link as LinkIcon, FileText, Sparkles } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
-interface Template {
+interface Prompt {
   id: string;
   title: string;
   description: string;
@@ -20,6 +20,7 @@ interface Template {
   category: string;
   rating: number;
   downloads: number;
+  tool: string;
 }
 
 const Upload = () => {
@@ -30,10 +31,12 @@ const Upload = () => {
     price: "",
     image: "",
     gumroadLink: "",
-    category: ""
+    category: "",
+    tool: ""
   });
 
-  const categories = ["Dashboard", "Landing Page", "Portfolio", "E-commerce", "Blog", "Mobile App"];
+  const categories = ["Web Apps", "Landing Pages", "Dashboards", "APIs", "Components", "Full Stack"];
+  const tools = ["Lovable.dev", "Cursor", "Replit", "GitHub Copilot"];
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({
@@ -46,7 +49,7 @@ const Upload = () => {
     e.preventDefault();
     
     // Validation
-    if (!formData.title || !formData.description || !formData.price || !formData.image || !formData.gumroadLink || !formData.category) {
+    if (!formData.title || !formData.description || !formData.price || !formData.image || !formData.gumroadLink || !formData.category || !formData.tool) {
       toast({
         title: "Error",
         description: "Please fill in all fields",
@@ -55,8 +58,8 @@ const Upload = () => {
       return;
     }
 
-    // Create new template
-    const newTemplate: Template = {
+    // Create new prompt
+    const newPrompt: Prompt = {
       id: Date.now().toString(),
       title: formData.title,
       description: formData.description,
@@ -64,19 +67,20 @@ const Upload = () => {
       image: formData.image,
       gumroadLink: formData.gumroadLink,
       category: formData.category,
+      tool: formData.tool,
       rating: 4.5,
       downloads: 0
     };
 
-    // Save to localStorage
-    const existingTemplates = localStorage.getItem("tempHubTemplates");
-    const templates = existingTemplates ? JSON.parse(existingTemplates) : [];
-    templates.push(newTemplate);
-    localStorage.setItem("tempHubTemplates", JSON.stringify(templates));
+    // Save to localStorage with correct key
+    const existingPrompts = localStorage.getItem("oceanPrompts");
+    const prompts = existingPrompts ? JSON.parse(existingPrompts) : [];
+    prompts.push(newPrompt);
+    localStorage.setItem("oceanPrompts", JSON.stringify(prompts));
 
     toast({
       title: "Success!",
-      description: "Template uploaded successfully"
+      description: "Prompt uploaded successfully"
     });
 
     // Reset form
@@ -86,7 +90,8 @@ const Upload = () => {
       price: "",
       image: "",
       gumroadLink: "",
-      category: ""
+      category: "",
+      tool: ""
     });
 
     // Navigate to store after a brief delay
@@ -96,28 +101,29 @@ const Upload = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-black/20 backdrop-blur-md border-b border-white/10">
+      <nav className="fixed top-0 w-full z-50 bg-black/20 backdrop-blur-xl border-b border-cyan-500/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link to="/" className="flex items-center">
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                TempHub
+              <Sparkles className="w-8 h-8 text-cyan-400 mr-2" />
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                Ocean of Prompts
               </h1>
             </Link>
-            <div className="flex items-center space-x-6">
-              <Link to="/" className="text-white hover:text-purple-300 transition-colors">
+            <div className="flex items-center space-x-8">
+              <Link to="/" className="text-gray-300 hover:text-cyan-400 transition-all duration-300 font-medium">
                 Home
               </Link>
-              <Link to="/store" className="text-white hover:text-purple-300 transition-colors">
-                Store
+              <Link to="/store" className="text-gray-300 hover:text-cyan-400 transition-all duration-300 font-medium">
+                Prompts
               </Link>
-              <Link to="/about" className="text-white hover:text-purple-300 transition-colors">
+              <Link to="/about" className="text-gray-300 hover:text-cyan-400 transition-all duration-300 font-medium">
                 About
               </Link>
-              <Link to="/upload" className="text-purple-300 font-medium">
-                Upload
+              <Link to="/upload" className="text-cyan-400 font-semibold">
+                Submit
               </Link>
             </div>
           </div>
@@ -128,9 +134,9 @@ const Upload = () => {
       <section className="pt-24 pb-20 px-4">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
-            <h1 className="text-5xl font-bold text-white mb-4">Upload Template</h1>
+            <h1 className="text-5xl font-bold text-white mb-4">Submit Prompt</h1>
             <p className="text-gray-300 text-lg">
-              Share your amazing templates with the community
+              Add new AI prompts to the Ocean of Prompts collection
             </p>
           </div>
 
@@ -138,7 +144,7 @@ const Upload = () => {
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <UploadIcon className="w-6 h-6" />
-                Template Details
+                Prompt Details
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -146,11 +152,11 @@ const Upload = () => {
                 <div className="space-y-2">
                   <Label htmlFor="title" className="text-white flex items-center gap-2">
                     <FileText className="w-4 h-4" />
-                    Template Title
+                    Prompt Title
                   </Label>
                   <Input
                     id="title"
-                    placeholder="Enter template title"
+                    placeholder="Enter prompt title"
                     value={formData.title}
                     onChange={(e) => handleInputChange("title", e.target.value)}
                     className="bg-white/10 border-white/20 text-white placeholder-gray-400"
@@ -163,7 +169,7 @@ const Upload = () => {
                   </Label>
                   <Textarea
                     id="description"
-                    placeholder="Describe your template..."
+                    placeholder="Describe your prompt..."
                     value={formData.description}
                     onChange={(e) => handleInputChange("description", e.target.value)}
                     className="bg-white/10 border-white/20 text-white placeholder-gray-400 min-h-[100px]"
@@ -204,6 +210,24 @@ const Upload = () => {
                 </div>
 
                 <div className="space-y-2">
+                  <Label htmlFor="tool" className="text-white">
+                    AI Tool
+                  </Label>
+                  <Select value={formData.tool} onValueChange={(value) => handleInputChange("tool", value)}>
+                    <SelectTrigger className="bg-white/10 border-white/20 text-white">
+                      <SelectValue placeholder="Select AI tool" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-slate-800 border-white/20">
+                      {tools.map((tool) => (
+                        <SelectItem key={tool} value={tool} className="text-white hover:bg-white/10">
+                          {tool}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="space-y-2">
                   <Label htmlFor="image" className="text-white flex items-center gap-2">
                     <Image className="w-4 h-4" />
                     Image URL
@@ -236,7 +260,7 @@ const Upload = () => {
                   </Label>
                   <Input
                     id="gumroadLink"
-                    placeholder="https://gumroad.com/l/your-template"
+                    placeholder="https://gumroad.com/l/your-prompt"
                     value={formData.gumroadLink}
                     onChange={(e) => handleInputChange("gumroadLink", e.target.value)}
                     className="bg-white/10 border-white/20 text-white placeholder-gray-400"
@@ -245,10 +269,10 @@ const Upload = () => {
 
                 <Button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white"
+                  className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white"
                   size="lg"
                 >
-                  Upload Template
+                  Submit Prompt
                 </Button>
               </form>
             </CardContent>
