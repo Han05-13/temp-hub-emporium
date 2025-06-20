@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -7,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Upload as UploadIcon, Image, Link as LinkIcon, FileText, Sparkles } from "lucide-react";
+import { Upload as UploadIcon, Image, Link as LinkIcon, FileText, Sparkles, Info } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
 interface Prompt {
@@ -21,6 +20,7 @@ interface Prompt {
   rating: number;
   downloads: number;
   tool: string;
+  instructions: string;
 }
 
 const Upload = () => {
@@ -32,8 +32,11 @@ const Upload = () => {
     image: "",
     gumroadLink: "",
     category: "",
-    tool: ""
+    tool: "",
+    instructions: ""
   });
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string>("");
 
   const categories = ["Web Apps", "Landing Pages", "Dashboards", "APIs", "Components", "Full Stack"];
   const tools = ["Lovable.dev", "Cursor", "Replit", "GitHub Copilot"];
@@ -45,14 +48,31 @@ const Upload = () => {
     }));
   };
 
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setImageFile(file);
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const result = e.target?.result as string;
+        setImagePreview(result);
+        setFormData(prev => ({
+          ...prev,
+          image: result
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
     // Validation
-    if (!formData.title || !formData.description || !formData.price || !formData.image || !formData.gumroadLink || !formData.category || !formData.tool) {
+    if (!formData.title || !formData.description || !formData.price || !formData.image || !formData.gumroadLink || !formData.category || !formData.tool || !formData.instructions) {
       toast({
         title: "Error",
-        description: "Please fill in all fields",
+        description: "Please fill in all fields including uploading an image",
         variant: "destructive"
       });
       return;
@@ -68,11 +88,12 @@ const Upload = () => {
       gumroadLink: formData.gumroadLink,
       category: formData.category,
       tool: formData.tool,
+      instructions: formData.instructions,
       rating: 4.5,
       downloads: 0
     };
 
-    // Save to localStorage with correct key
+    // Save to localStorage as JSON
     const existingPrompts = localStorage.getItem("oceanPrompts");
     const prompts = existingPrompts ? JSON.parse(existingPrompts) : [];
     prompts.push(newPrompt);
@@ -91,8 +112,11 @@ const Upload = () => {
       image: "",
       gumroadLink: "",
       category: "",
-      tool: ""
+      tool: "",
+      instructions: ""
     });
+    setImageFile(null);
+    setImagePreview("");
 
     // Navigate to store after a brief delay
     setTimeout(() => {
@@ -176,6 +200,20 @@ const Upload = () => {
                   />
                 </div>
 
+                <div className="space-y-2">
+                  <Label htmlFor="instructions" className="text-white flex items-center gap-2">
+                    <Info className="w-4 h-4" />
+                    Usage Instructions
+                  </Label>
+                  <Textarea
+                    id="instructions"
+                    placeholder="Provide detailed instructions on how to use this prompt effectively..."
+                    value={formData.instructions}
+                    onChange={(e) => handleInputChange("instructions", e.target.value)}
+                    className="bg-white/10 border-white/20 text-white placeholder-gray-400 min-h-[120px]"
+                  />
+                </div>
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="price" className="text-white">
@@ -230,24 +268,21 @@ const Upload = () => {
                 <div className="space-y-2">
                   <Label htmlFor="image" className="text-white flex items-center gap-2">
                     <Image className="w-4 h-4" />
-                    Image URL
+                    Upload Image
                   </Label>
                   <Input
                     id="image"
-                    placeholder="https://example.com/image.jpg"
-                    value={formData.image}
-                    onChange={(e) => handleInputChange("image", e.target.value)}
-                    className="bg-white/10 border-white/20 text-white placeholder-gray-400"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    className="bg-white/10 border-white/20 text-white file:bg-cyan-500/20 file:text-cyan-300 file:border-0 file:rounded-md file:px-3 file:py-1"
                   />
-                  {formData.image && (
+                  {imagePreview && (
                     <div className="mt-4 rounded-lg overflow-hidden">
                       <img
-                        src={formData.image}
+                        src={imagePreview}
                         alt="Preview"
                         className="w-full h-48 object-cover"
-                        onError={(e) => {
-                          e.currentTarget.style.display = 'none';
-                        }}
                       />
                     </div>
                   )}
