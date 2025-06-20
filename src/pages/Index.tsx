@@ -3,9 +3,6 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Star, Users, Zap, TrendingUp } from "lucide-react";
-import BannerAd from "../components/ads/BannerAd";
-import PopupAd from "../components/ads/PopupAd";
-import InlineAd from "../components/ads/InlineAd";
 
 const Index = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -39,12 +36,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      {/* Popup Ad */}
-      <PopupAd delay={10} showOnce={true} />
-
-      {/* Top Banner Ad */}
-      <BannerAd position="top" size="small" />
-
       {/* Navigation */}
       <nav className="sticky top-0 w-full z-40 bg-black/20 backdrop-blur-md border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -104,9 +95,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Inline Ad */}
-      <InlineAd size="medium" />
-
       {/* Features Section */}
       <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
@@ -128,9 +116,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Inline Ad */}
-      <InlineAd size="large" />
-
       {/* CTA Section */}
       <section className="py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
@@ -148,9 +133,6 @@ const Index = () => {
           </div>
         </div>
       </section>
-
-      {/* Bottom Banner Ad */}
-      <BannerAd position="bottom" size="medium" />
 
       {/* Footer */}
       <footer className="border-t border-white/10 py-12 px-4">
