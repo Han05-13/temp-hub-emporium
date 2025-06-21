@@ -1,6 +1,7 @@
+
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Code2, Brain, Zap, Bot, Target, Users, Lightbulb, Menu } from "lucide-react";
+import { ArrowRight, Code2, Brain, Zap, Bot, Target, Users, Lightbulb, Menu, Sparkles } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const About = () => {
