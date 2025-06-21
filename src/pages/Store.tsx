@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, Sparkles, Code2, Bot, Zap, Brain, Menu, X } from "lucide-react";
+import { Search, Code2, Bot, Zap, Brain, Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import TemplateCard from "../components/TemplateCard";
 
@@ -50,7 +50,7 @@ const Store = () => {
   const getToolIcon = (tool: string) => {
     switch(tool) {
       case "Lovable.dev":
-        return <Sparkles className="w-4 h-4" />;
+        return <div className="w-4 h-4 bg-orange-500 rounded-full" />;
       case "Cursor":
         return <Code2 className="w-4 h-4" />;
       case "Replit":
@@ -66,21 +66,21 @@ const Store = () => {
     <div className="flex flex-col space-y-6 p-6">
       <Link 
         to="/" 
-        className="text-lg font-medium text-gray-300 hover:text-cyan-400 transition-all duration-300"
+        className="text-lg font-medium text-slate-600 hover:text-orange-500 transition-all duration-300"
         onClick={() => setIsMobileMenuOpen(false)}
       >
         Home
       </Link>
       <Link 
         to="/store" 
-        className="text-lg font-medium text-cyan-400"
+        className="text-lg font-medium text-orange-500"
         onClick={() => setIsMobileMenuOpen(false)}
       >
         Prompts
       </Link>
       <Link 
         to="/about" 
-        className="text-lg font-medium text-gray-300 hover:text-cyan-400 transition-all duration-300"
+        className="text-lg font-medium text-slate-600 hover:text-orange-500 transition-all duration-300"
         onClick={() => setIsMobileMenuOpen(false)}
       >
         About
@@ -89,27 +89,31 @@ const Store = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950">
+    <div className="min-h-screen bg-gradient-to-br from-sky-50 via-blue-50 to-teal-50">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-black/20 backdrop-blur-xl border-b border-cyan-500/20">
+      <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl border-b border-sky-200/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link to="/" className="flex items-center">
-              <Sparkles className="w-6 h-6 sm:w-8 sm:h-8 text-cyan-400 mr-2" />
-              <h1 className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+              <img 
+                src="/lovable-uploads/deabc4bb-c9c6-4785-aa75-f1c6eb24df13.png" 
+                alt="Ocean of Prompts Logo" 
+                className="w-6 h-6 sm:w-8 sm:h-8 mr-2"
+              />
+              <h1 className="text-lg sm:text-2xl font-bold text-slate-800">
                 Ocean of Prompts
               </h1>
             </Link>
             
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
-              <Link to="/" className="text-gray-300 hover:text-cyan-400 transition-all duration-300 font-medium">
+              <Link to="/" className="text-slate-600 hover:text-orange-500 transition-all duration-300 font-medium">
                 Home
               </Link>
-              <Link to="/store" className="text-cyan-400 font-semibold">
+              <Link to="/store" className="text-orange-500 font-semibold">
                 Prompts
               </Link>
-              <Link to="/about" className="text-gray-300 hover:text-cyan-400 transition-all duration-300 font-medium">
+              <Link to="/about" className="text-slate-600 hover:text-orange-500 transition-all duration-300 font-medium">
                 About
               </Link>
             </div>
@@ -121,19 +125,23 @@ const Store = () => {
                   <Button 
                     variant="ghost" 
                     size="sm" 
-                    className="text-cyan-400 hover:text-cyan-300 hover:bg-cyan-400/10"
+                    className="text-orange-500 hover:text-orange-600 hover:bg-orange-50"
                   >
                     <Menu className="w-6 h-6" />
                   </Button>
                 </SheetTrigger>
                 <SheetContent 
                   side="right" 
-                  className="w-[280px] bg-slate-950/95 backdrop-blur-xl border-l border-cyan-500/20"
+                  className="w-[280px] bg-white/95 backdrop-blur-xl border-l border-sky-200"
                 >
                   <div className="flex items-center justify-between mb-8">
                     <div className="flex items-center">
-                      <Sparkles className="w-6 h-6 text-cyan-400 mr-2" />
-                      <h2 className="text-lg font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                      <img 
+                        src="/lovable-uploads/deabc4bb-c9c6-4785-aa75-f1c6eb24df13.png" 
+                        alt="Ocean of Prompts Logo" 
+                        className="w-6 h-6 mr-2"
+                      />
+                      <h2 className="text-lg font-bold text-slate-800">
                         Menu
                       </h2>
                     </div>
@@ -152,12 +160,16 @@ const Store = () => {
           <div className="text-center mb-8 sm:mb-12">
             <div className="flex justify-center mb-4 sm:mb-6">
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full blur-lg opacity-30 animate-pulse"></div>
-                <Brain className="relative w-12 h-12 sm:w-16 sm:h-16 text-cyan-400" />
+                <div className="absolute inset-0 bg-gradient-to-r from-orange-400/30 to-blue-400/30 rounded-full blur-lg animate-pulse"></div>
+                <img 
+                  src="/lovable-uploads/deabc4bb-c9c6-4785-aa75-f1c6eb24df13.png" 
+                  alt="Ocean of Prompts Logo" 
+                  className="relative w-12 h-12 sm:w-16 sm:h-16"
+                />
               </div>
             </div>
-            <h1 className="text-3xl sm:text-5xl font-bold text-white mb-4">AI Prompt Store</h1>
-            <p className="text-gray-300 text-base sm:text-lg max-w-2xl mx-auto px-4">
+            <h1 className="text-3xl sm:text-5xl font-bold text-slate-800 mb-4">AI Prompt Store</h1>
+            <p className="text-slate-600 text-base sm:text-lg max-w-2xl mx-auto px-4">
               Discover premium AI prompts crafted for modern development tools. Build faster, code smarter.
             </p>
           </div>
@@ -165,12 +177,12 @@ const Store = () => {
           {/* Search and Filters */}
           <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8">
             <div className="relative max-w-xl mx-auto px-4">
-              <Search className="absolute left-8 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Search className="absolute left-8 top-1/2 transform -translate-y-1/2 text-slate-400 w-5 h-5" />
               <Input
                 placeholder="Search prompts..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 h-10 sm:h-12 bg-white/10 border-white/20 text-white placeholder-gray-400 text-base sm:text-lg backdrop-blur-sm"
+                className="pl-12 h-10 sm:h-12 bg-white/60 border-sky-200 text-slate-800 placeholder-slate-400 text-base sm:text-lg backdrop-blur-sm"
               />
             </div>
             
@@ -220,12 +232,13 @@ const Store = () => {
           ) : (
             <div className="text-center py-12 sm:py-20 px-4">
               <div className="relative mb-6 sm:mb-8">
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 to-blue-400/20 rounded-full blur-xl"></div>
-                <div className="relative w-16 h-16 sm:w-24 sm:h-24 mx-auto bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full flex items-center justify-center border border-cyan-400/30">
-                  <Code2 className="w-8 h-8 sm:w-12 sm:h-12 text-cyan-400" />
+                <div className="absolute inset-0 bg-gradient-to-r from-orange-400/20 to-blue-400/20 rounded-full blur-xl"></div>
+                <div className="relative w-16 h-16 sm:w-24 sm:h-24 mx-auto bg-gradient-to-r from-orange-100 to-blue-100 rounded-full flex items-center justify-center border border-orange-200">
+                  <Code2 className="w-8 h-8 sm:w-12 sm:h-12 text-orange-500" />
                 </div>
               </div>
-              <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">No Prompts Available Yet</h3>
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-800 mb-4">No Prompts Available Yet</h3>
+              <p className="text-slate-600 mb-6">Check back soon for new AI prompts!</p>
             </div>
           )}
         </div>
