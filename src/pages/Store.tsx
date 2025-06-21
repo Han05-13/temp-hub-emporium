@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, Sparkles, Code2, Bot, Zap, Brain } from "lucide-react";
+import { Search, Sparkles, Code2, Bot, Zap, Brain, Menu, X } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import TemplateCard from "../components/TemplateCard";
 
 interface Prompt {
@@ -25,6 +26,7 @@ const Store = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedTool, setSelectedTool] = useState("All");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     // Load prompts from localStorage
@@ -60,6 +62,32 @@ const Store = () => {
     }
   };
 
+  const MobileMenu = () => (
+    <div className="flex flex-col space-y-6 p-6">
+      <Link 
+        to="/" 
+        className="text-lg font-medium text-gray-300 hover:text-cyan-400 transition-all duration-300"
+        onClick={() => setIsMobileMenuOpen(false)}
+      >
+        Home
+      </Link>
+      <Link 
+        to="/store" 
+        className="text-lg font-medium text-cyan-400"
+        onClick={() => setIsMobileMenuOpen(false)}
+      >
+        Prompts
+      </Link>
+      <Link 
+        to="/about" 
+        className="text-lg font-medium text-gray-300 hover:text-cyan-400 transition-all duration-300"
+        onClick={() => setIsMobileMenuOpen(false)}
+      >
+        About
+      </Link>
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950">
       {/* Navigation */}
@@ -72,7 +100,9 @@ const Store = () => {
                 Ocean of Prompts
               </h1>
             </Link>
-            <div className="hidden sm:flex items-center space-x-8">
+            
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-8">
               <Link to="/" className="text-gray-300 hover:text-cyan-400 transition-all duration-300 font-medium">
                 Home
               </Link>
@@ -83,11 +113,34 @@ const Store = () => {
                 About
               </Link>
             </div>
-            {/* Mobile menu button - simplified for now */}
-            <div className="sm:hidden">
-              <Button variant="ghost" size="sm" className="text-cyan-400">
-                Menu
-              </Button>
+
+            {/* Mobile Navigation */}
+            <div className="md:hidden">
+              <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+                <SheetTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="text-cyan-400 hover:text-cyan-300 hover:bg-cyan-400/10"
+                  >
+                    <Menu className="w-6 h-6" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent 
+                  side="right" 
+                  className="w-[280px] bg-slate-950/95 backdrop-blur-xl border-l border-cyan-500/20"
+                >
+                  <div className="flex items-center justify-between mb-8">
+                    <div className="flex items-center">
+                      <Sparkles className="w-6 h-6 text-cyan-400 mr-2" />
+                      <h2 className="text-lg font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                        Menu
+                      </h2>
+                    </div>
+                  </div>
+                  <MobileMenu />
+                </SheetContent>
+              </Sheet>
             </div>
           </div>
         </div>

@@ -1,11 +1,12 @@
-
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Code2, Zap, Brain, Cpu, Sparkles, Bot } from "lucide-react";
+import { ArrowRight, Code2, Zap, Brain, Cpu, Sparkles, Bot, Menu } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const Index = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
@@ -52,6 +53,32 @@ const Index = () => {
     }
   ];
 
+  const MobileMenu = () => (
+    <div className="flex flex-col space-y-6 p-6">
+      <Link 
+        to="/store" 
+        className="text-lg font-medium text-gray-300 hover:text-cyan-400 transition-all duration-300"
+        onClick={() => setIsMobileMenuOpen(false)}
+      >
+        Prompts
+      </Link>
+      <Link 
+        to="/about" 
+        className="text-lg font-medium text-gray-300 hover:text-cyan-400 transition-all duration-300"
+        onClick={() => setIsMobileMenuOpen(false)}
+      >
+        About
+      </Link>
+      <Link 
+        to="/upload" 
+        className="text-lg font-medium text-gray-300 hover:text-cyan-400 transition-all duration-300"
+        onClick={() => setIsMobileMenuOpen(false)}
+      >
+        Submit
+      </Link>
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950">
       {/* Navigation */}
@@ -59,12 +86,14 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-              <Sparkles className="w-8 h-8 text-cyan-400 mr-2" />
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+              <Sparkles className="w-6 h-6 sm:w-8 sm:h-8 text-cyan-400 mr-2" />
+              <h1 className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
                 Ocean of Prompts
               </h1>
             </div>
-            <div className="flex items-center space-x-8">
+            
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-8">
               <Link to="/store" className="text-gray-300 hover:text-cyan-400 transition-all duration-300 font-medium">
                 Prompts
               </Link>
@@ -77,6 +106,35 @@ const Index = () => {
               <Button size="sm" className="px-6">
                 Get Started
               </Button>
+            </div>
+
+            {/* Mobile Navigation */}
+            <div className="md:hidden">
+              <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+                <SheetTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="text-cyan-400 hover:text-cyan-300 hover:bg-cyan-400/10"
+                  >
+                    <Menu className="w-6 h-6" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent 
+                  side="right" 
+                  className="w-[280px] bg-slate-950/95 backdrop-blur-xl border-l border-cyan-500/20"
+                >
+                  <div className="flex items-center justify-between mb-8">
+                    <div className="flex items-center">
+                      <Sparkles className="w-6 h-6 text-cyan-400 mr-2" />
+                      <h2 className="text-lg font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                        Menu
+                      </h2>
+                    </div>
+                  </div>
+                  <MobileMenu />
+                </SheetContent>
+              </Sheet>
             </div>
           </div>
         </div>
