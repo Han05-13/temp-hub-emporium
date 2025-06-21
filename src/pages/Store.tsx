@@ -66,7 +66,7 @@ const Store = () => {
     <div className="flex flex-col space-y-6 p-6">
       <Link 
         to="/" 
-        className="text-lg font-medium text-slate-600 hover:text-orange-500 transition-all duration-300"
+        className="text-lg font-medium text-gray-600 hover:text-orange-500 transition-colors"
         onClick={() => setIsMobileMenuOpen(false)}
       >
         Home
@@ -80,7 +80,7 @@ const Store = () => {
       </Link>
       <Link 
         to="/about" 
-        className="text-lg font-medium text-slate-600 hover:text-orange-500 transition-all duration-300"
+        className="text-lg font-medium text-gray-600 hover:text-orange-500 transition-colors"
         onClick={() => setIsMobileMenuOpen(false)}
       >
         About
@@ -89,9 +89,9 @@ const Store = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-sky-50 via-blue-50 to-teal-50">
+    <div className="min-h-screen bg-gray-50">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl border-b border-sky-200/50">
+      <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link to="/" className="flex items-center">
@@ -100,26 +100,26 @@ const Store = () => {
                 alt="Ocean of Prompts Logo" 
                 className="w-6 h-6 sm:w-8 sm:h-8 mr-2 rounded-full"
               />
-              <h1 className="text-lg sm:text-2xl font-bold text-slate-800">
+              <h1 className="text-lg sm:text-2xl font-bold text-gray-900">
                 Ocean of Prompts
               </h1>
             </Link>
             
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
-              <Link to="/" className="text-slate-600 hover:text-orange-500 transition-all duration-300 font-medium">
+              <Link to="/" className="text-gray-600 hover:text-orange-500 transition-colors font-medium">
                 Home
               </Link>
               <Link to="/store" className="text-orange-500 font-semibold">
                 Prompts
               </Link>
-              <Link to="/about" className="text-slate-600 hover:text-orange-500 transition-all duration-300 font-medium">
+              <Link to="/about" className="text-gray-600 hover:text-orange-500 transition-colors font-medium">
                 About
               </Link>
             </div>
 
             {/* Mobile Navigation */}
-            <div className="md:hidden">
+            <div className="m-hidden">
               <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
                 <SheetTrigger asChild>
                   <Button 
@@ -132,7 +132,7 @@ const Store = () => {
                 </SheetTrigger>
                 <SheetContent 
                   side="right" 
-                  className="w-[280px] bg-white/95 backdrop-blur-xl border-l border-sky-200"
+                  className="w-[280px] bg-white/95 backdrop-blur-sm border-l border-gray-200"
                 >
                   <div className="flex items-center justify-between mb-8">
                     <div className="flex items-center">
@@ -141,7 +141,7 @@ const Store = () => {
                         alt="Ocean of Prompts Logo" 
                         className="w-6 h-6 mr-2 rounded-full"
                       />
-                      <h2 className="text-lg font-bold text-slate-800">
+                      <h2 className="text-lg font-bold text-gray-900">
                         Menu
                       </h2>
                     </div>
@@ -159,17 +159,14 @@ const Store = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-8 sm:mb-12">
             <div className="flex justify-center mb-4 sm:mb-6">
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-orange-400/30 to-blue-400/30 rounded-full blur-lg animate-pulse"></div>
-                <img 
-                  src="/lovable-uploads/deabc4bb-c9c6-4785-aa75-f1c6eb24df13.png" 
-                  alt="Ocean of Prompts Logo" 
-                  className="relative w-12 h-12 sm:w-16 sm:h-16 rounded-full"
-                />
-              </div>
+              <img 
+                src="/lovable-uploads/deabc4bb-c9c6-4785-aa75-f1c6eb24df13.png" 
+                alt="Ocean of Prompts Logo" 
+                className="w-12 h-12 sm:w-16 sm:h-16 rounded-full"
+              />
             </div>
-            <h1 className="text-3xl sm:text-5xl font-bold text-slate-800 mb-4">AI Prompt Store</h1>
-            <p className="text-slate-600 text-base sm:text-lg max-w-2xl mx-auto px-4">
+            <h1 className="text-3xl sm:text-5xl font-bold text-gray-900 mb-4">AI Prompt Store</h1>
+            <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto px-4">
               Discover premium AI prompts crafted for modern development tools. Build faster, code smarter.
             </p>
           </div>
@@ -177,12 +174,12 @@ const Store = () => {
           {/* Search and Filters */}
           <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8">
             <div className="relative max-w-xl mx-auto px-4">
-              <Search className="absolute left-8 top-1/2 transform -translate-y-1/2 text-slate-400 w-5 h-5" />
+              <Search className="absolute left-8 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <Input
                 placeholder="Search prompts..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 h-10 sm:h-12 bg-white/60 border-sky-200 text-slate-800 placeholder-slate-400 text-base sm:text-lg backdrop-blur-sm"
+                className="pl-12 h-10 sm:h-12 bg-white border-gray-200 text-gray-900 placeholder-gray-400 text-base sm:text-lg"
               />
             </div>
             
@@ -192,7 +189,7 @@ const Store = () => {
                 <Button
                   key={category}
                   variant={selectedCategory === category ? "default" : "outline"}
-                  onClick={() => setSelectedCategory(category)}
+                  onClick={() => setSelectedCategory(category)}  
                   className="transition-all duration-300 hover:scale-105 text-xs sm:text-sm"
                   size="sm"
                 >
@@ -231,14 +228,11 @@ const Store = () => {
             </div>
           ) : (
             <div className="text-center py-12 sm:py-20 px-4">
-              <div className="relative mb-6 sm:mb-8">
-                <div className="absolute inset-0 bg-gradient-to-r from-orange-400/20 to-blue-400/20 rounded-full blur-xl"></div>
-                <div className="relative w-16 h-16 sm:w-24 sm:h-24 mx-auto bg-gradient-to-r from-orange-100 to-blue-100 rounded-full flex items-center justify-center border border-orange-200">
-                  <Code2 className="w-8 h-8 sm:w-12 sm:h-12 text-orange-500" />
-                </div>
+              <div className="w-16 h-16 sm:w-24 sm:h-24 mx-auto bg-gray-100 rounded-full flex items-center justify-center border border-gray-200 mb-6 sm:mb-8">
+                <Code2 className="w-8 h-8 sm:w-12 sm:h-12 text-gray-400" />
               </div>
-              <h3 className="text-xl sm:text-2xl font-bold text-slate-800 mb-4">No Prompts Available Yet</h3>
-              <p className="text-slate-600 mb-6">Check back soon for new AI prompts!</p>
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">No Prompts Available Yet</h3>
+              <p className="text-gray-600 mb-6">Check back soon for new AI prompts!</p>
             </div>
           )}
         </div>
