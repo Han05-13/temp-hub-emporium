@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -90,7 +89,7 @@ const Index = () => {
               <img 
                 src="/lovable-uploads/deabc4bb-c9c6-4785-aa75-f1c6eb24df13.png" 
                 alt="Ocean of Prompts Logo" 
-                className="w-8 h-8 sm:w-10 sm:h-10 mr-3"
+                className="w-8 h-8 sm:w-10 sm:h-10 mr-3 rounded-full"
               />
               <h1 className="text-lg sm:text-2xl font-bold text-slate-800">
                 Ocean of Prompts
@@ -134,7 +133,7 @@ const Index = () => {
                       <img 
                         src="/lovable-uploads/deabc4bb-c9c6-4785-aa75-f1c6eb24df13.png" 
                         alt="Ocean of Prompts Logo" 
-                        className="w-6 h-6 mr-2"
+                        className="w-6 h-6 mr-2 rounded-full"
                       />
                       <h2 className="text-lg font-bold text-slate-800">
                         Menu
@@ -159,7 +158,7 @@ const Index = () => {
                 <img 
                   src="/lovable-uploads/deabc4bb-c9c6-4785-aa75-f1c6eb24df13.png" 
                   alt="Ocean of Prompts Logo" 
-                  className="relative w-24 h-24 sm:w-32 sm:h-32"
+                  className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-full"
                 />
               </div>
             </div>
@@ -271,7 +270,7 @@ const Index = () => {
             <img 
               src="/lovable-uploads/deabc4bb-c9c6-4785-aa75-f1c6eb24df13.png" 
               alt="Ocean of Prompts Logo" 
-              className="w-6 h-6 mr-2"
+              className="w-6 h-6 mr-2 rounded-full"
             />
             <h3 className="text-2xl font-bold text-slate-800">
               Ocean of Prompts

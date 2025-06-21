@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { Upload as UploadIcon, Menu, AlertCircle, FileText } from "lucide-react";
+import { Upload as UploadIcon, Menu, AlertCircle, FileText, Sparkles } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useToast } from "@/hooks/use-toast";
@@ -153,24 +153,63 @@ const Upload = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link to="/" className="flex items-center">
-              <Sparkles className="w-6 h-6 sm:w-8 sm:h-8 text-cyan-400 mr-2" />
-              <h1 className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+              <img 
+                src="/lovable-uploads/deabc4bb-c9c6-4785-aa75-f1c6eb24df13.png" 
+                alt="Ocean of Prompts Logo" 
+                className="w-6 h-6 sm:w-8 sm:h-8 mr-2 rounded-full"
+              />
+              <h1 className="text-lg sm:text-2xl font-bold text-slate-800">
                 Ocean of Prompts
               </h1>
             </Link>
-            <div className="hidden sm:flex items-center space-x-8">
-              <Link to="/" className="text-gray-300 hover:text-cyan-400 transition-all duration-300 font-medium">
+            
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-8">
+              <Link to="/" className="text-slate-600 hover:text-orange-500 transition-all duration-300 font-medium">
                 Home
               </Link>
-              <Link to="/store" className="text-gray-300 hover:text-cyan-400 transition-all duration-300 font-medium">
+              <Link to="/store" className="text-slate-600 hover:text-orange-500 transition-all duration-300 font-medium">
                 Prompts
               </Link>
-              <Link to="/about" className="text-gray-300 hover:text-cyan-400 transition-all duration-300 font-medium">
+              <Link to="/about" className="text-slate-600 hover:text-orange-500 transition-all duration-300 font-medium">
                 About
               </Link>
-              <Link to="/upload" className="text-cyan-400 font-semibold">
+              <Link to="/upload" className="text-orange-500 font-semibold">
                 Submit
               </Link>
+            </div>
+
+            {/* Mobile Navigation */}
+            <div className="md:hidden">
+              <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+                <SheetTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="text-orange-500 hover:text-orange-600 hover:bg-orange-50"
+                  >
+                    <Menu className="w-6 h-6" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent 
+                  side="right" 
+                  className="w-[280px] bg-white/95 backdrop-blur-xl border-l border-sky-200"
+                >
+                  <div className="flex items-center justify-between mb-8">
+                    <div className="flex items-center">
+                      <img 
+                        src="/lovable-uploads/deabc4bb-c9c6-4785-aa75-f1c6eb24df13.png" 
+                        alt="Ocean of Prompts Logo" 
+                        className="w-6 h-6 mr-2 rounded-full"
+                      />
+                      <h2 className="text-lg font-bold text-slate-800">
+                        Menu
+                      </h2>
+                    </div>
+                  </div>
+                  <MobileMenu />
+                </SheetContent>
+              </Sheet>
             </div>
           </div>
         </div>

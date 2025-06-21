@@ -98,7 +98,7 @@ const Store = () => {
               <img 
                 src="/lovable-uploads/deabc4bb-c9c6-4785-aa75-f1c6eb24df13.png" 
                 alt="Ocean of Prompts Logo" 
-                className="w-6 h-6 sm:w-8 sm:h-8 mr-2"
+                className="w-6 h-6 sm:w-8 sm:h-8 mr-2 rounded-full"
               />
               <h1 className="text-lg sm:text-2xl font-bold text-slate-800">
                 Ocean of Prompts
@@ -139,7 +139,7 @@ const Store = () => {
                       <img 
                         src="/lovable-uploads/deabc4bb-c9c6-4785-aa75-f1c6eb24df13.png" 
                         alt="Ocean of Prompts Logo" 
-                        className="w-6 h-6 mr-2"
+                        className="w-6 h-6 mr-2 rounded-full"
                       />
                       <h2 className="text-lg font-bold text-slate-800">
                         Menu
@@ -164,7 +164,7 @@ const Store = () => {
                 <img 
                   src="/lovable-uploads/deabc4bb-c9c6-4785-aa75-f1c6eb24df13.png" 
                   alt="Ocean of Prompts Logo" 
-                  className="relative w-12 h-12 sm:w-16 sm:h-16"
+                  className="relative w-12 h-12 sm:w-16 sm:h-16 rounded-full"
                 />
               </div>
             </div>

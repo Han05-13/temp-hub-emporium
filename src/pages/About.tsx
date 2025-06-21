@@ -1,7 +1,7 @@
-
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles, Code2, Brain, Zap, Bot, Target, Users, Lightbulb } from "lucide-react";
+import { ArrowRight, Code2, Brain, Zap, Bot, Target, Users, Lightbulb, Menu } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const About = () => {
   const highlights = [
@@ -49,28 +49,32 @@ const About = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950">
+    <div className="min-h-screen bg-gradient-to-br from-sky-50 via-blue-50 to-teal-50">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-black/20 backdrop-blur-xl border-b border-cyan-500/20">
+      <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl border-b border-sky-200/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link to="/" className="flex items-center">
-              <Sparkles className="w-8 h-8 text-cyan-400 mr-2" />
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+              <img 
+                src="/lovable-uploads/deabc4bb-c9c6-4785-aa75-f1c6eb24df13.png" 
+                alt="Ocean of Prompts Logo" 
+                className="w-8 h-8 mr-2 rounded-full"
+              />
+              <h1 className="text-2xl font-bold text-slate-800">
                 Ocean of Prompts
               </h1>
             </Link>
             <div className="flex items-center space-x-8">
-              <Link to="/" className="text-gray-300 hover:text-cyan-400 transition-all duration-300 font-medium">
+              <Link to="/" className="text-slate-600 hover:text-orange-500 transition-all duration-300 font-medium">
                 Home
               </Link>
-              <Link to="/store" className="text-gray-300 hover:text-cyan-400 transition-all duration-300 font-medium">
+              <Link to="/store" className="text-slate-600 hover:text-orange-500 transition-all duration-300 font-medium">
                 Prompts
               </Link>
-              <Link to="/about" className="text-cyan-400 font-semibold">
+              <Link to="/about" className="text-orange-500 font-semibold">
                 About
               </Link>
-              <Link to="/upload" className="text-gray-300 hover:text-cyan-400 transition-all duration-300 font-medium">
+              <Link to="/upload" className="text-slate-600 hover:text-orange-500 transition-all duration-300 font-medium">
                 Submit
               </Link>
             </div>
@@ -83,17 +87,21 @@ const About = () => {
         <div className="max-w-4xl mx-auto text-center">
           <div className="flex justify-center mb-8">
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full blur-xl opacity-30 animate-pulse"></div>
-              <Brain className="relative w-20 h-20 text-cyan-400" />
+              <div className="absolute inset-0 bg-gradient-to-r from-orange-400/30 to-blue-400/30 rounded-full blur-xl opacity-30 animate-pulse"></div>
+              <img 
+                src="/lovable-uploads/deabc4bb-c9c6-4785-aa75-f1c6eb24df13.png" 
+                alt="Ocean of Prompts Logo" 
+                className="relative w-20 h-20 rounded-full"
+              />
             </div>
           </div>
-          <h1 className="text-6xl md:text-7xl font-bold text-white mb-6 tracking-tight">
+          <h1 className="text-6xl md:text-7xl font-bold text-slate-800 mb-6 tracking-tight">
             About
-            <span className="block bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+            <span className="block bg-gradient-to-r from-orange-500 via-blue-500 to-teal-500 bg-clip-text text-transparent">
               Ocean of Prompts
             </span>
           </h1>
-          <p className="text-xl text-gray-300 mb-8 leading-relaxed">
+          <p className="text-xl text-slate-600 mb-8 leading-relaxed">
             We're revolutionizing AI-powered development by providing structured, 
             tested prompts that help developers build better applications faster 
             with modern no-code and low-code tools.
@@ -106,13 +114,13 @@ const About = () => {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-4xl font-bold text-white mb-6">Our Mission</h2>
-              <p className="text-gray-300 text-lg mb-6 leading-relaxed">
+              <h2 className="text-4xl font-bold text-slate-800 mb-6">Our Mission</h2>
+              <p className="text-slate-600 text-lg mb-6 leading-relaxed">
                 The future of development is AI-powered, and we believe every developer 
                 should have access to high-quality prompts that unlock the full potential 
                 of these revolutionary tools.
               </p>
-              <p className="text-gray-300 text-lg mb-8 leading-relaxed">
+              <p className="text-slate-600 text-lg mb-8 leading-relaxed">
                 Ocean of Prompts bridges the gap between human creativity and AI capability, 
                 providing structured prompts that help you communicate your vision effectively 
                 to AI development tools.
@@ -124,27 +132,27 @@ const About = () => {
                 </Button>
               </Link>
             </div>
-            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-cyan-400/20">
-              <h3 className="text-2xl font-semibold text-white mb-6">What We Provide</h3>
-              <ul className="space-y-4 text-gray-300">
+            <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-8 border border-sky-200">
+              <h3 className="text-2xl font-semibold text-slate-800 mb-6">What We Provide</h3>
+              <ul className="space-y-4 text-slate-600">
                 <li className="flex items-center">
-                  <Bot className="w-5 h-5 text-cyan-400 mr-3 flex-shrink-0" />
+                  <Bot className="w-5 h-5 text-orange-500 mr-3 flex-shrink-0" />
                   Tool-specific AI prompts
                 </li>
                 <li className="flex items-center">
-                  <Code2 className="w-5 h-5 text-cyan-400 mr-3 flex-shrink-0" />
+                  <Code2 className="w-5 h-5 text-orange-500 mr-3 flex-shrink-0" />
                   Structured development workflows
                 </li>
                 <li className="flex items-center">
-                  <Brain className="w-5 h-5 text-cyan-400 mr-3 flex-shrink-0" />
+                  <Brain className="w-5 h-5 text-orange-500 mr-3 flex-shrink-0" />
                   Vibe-coding optimized prompts
                 </li>
                 <li className="flex items-center">
-                  <Zap className="w-5 h-5 text-cyan-400 mr-3 flex-shrink-0" />
+                  <Zap className="w-5 h-5 text-orange-500 mr-3 flex-shrink-0" />
                   Rapid prototyping templates
                 </li>
                 <li className="flex items-center">
-                  <Users className="w-5 h-5 text-cyan-400 mr-3 flex-shrink-0" />
+                  <Users className="w-5 h-5 text-orange-500 mr-3 flex-shrink-0" />
                   Community-tested solutions
                 </li>
               </ul>
@@ -157,8 +165,8 @@ const About = () => {
       <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">Supported AI Development Tools</h2>
-            <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+            <h2 className="text-4xl font-bold text-slate-800 mb-4">Supported AI Development Tools</h2>
+            <p className="text-slate-600 text-lg max-w-2xl mx-auto">
               Our prompts are specifically crafted and tested for the leading AI-powered development platforms.
             </p>
           </div>
@@ -186,8 +194,8 @@ const About = () => {
       <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">Why Ocean of Prompts?</h2>
-            <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+            <h2 className="text-4xl font-bold text-slate-800 mb-4">Why Ocean of Prompts?</h2>
+            <p className="text-slate-600 text-lg max-w-2xl mx-auto">
               We understand the nuances of AI-powered development and create prompts that deliver results.
             </p>
           </div>
@@ -226,15 +234,19 @@ const About = () => {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-cyan-500/20 py-12 px-4">
+      <footer className="border-t border-sky-200 py-12 px-4 bg-white/30 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex items-center justify-center mb-4">
-            <Sparkles className="w-6 h-6 text-cyan-400 mr-2" />
-            <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+            <img 
+              src="/lovable-uploads/deabc4bb-c9c6-4785-aa75-f1c6eb24df13.png" 
+              alt="Ocean of Prompts Logo" 
+              className="w-6 h-6 mr-2 rounded-full"
+            />
+            <h3 className="text-2xl font-bold text-slate-800">
               Ocean of Prompts
             </h3>
           </div>
-          <p className="text-gray-400">
+          <p className="text-slate-500">
             © 2024 Ocean of Prompts. Empowering AI-driven development.
           </p>
         </div>
